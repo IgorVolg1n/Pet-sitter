@@ -21,10 +21,17 @@ public class SIBeansTest {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:spring/set/sample-config-02.xml");
 
         logger.info(" --- All beans in context --- ");
-        for(String beanName :  ctx.getBeanDefinitionNames()) {
+        for (String beanName : ctx.getBeanDefinitionNames()) {
             logger.info("Bean " + beanName + " of type " + ctx.getBean(beanName).getClass().getSimpleName());
         }
 
-        //TODO 4. Retrieve beans of types ComplexBean and make sure their dependencies were correctly set.
+        ComplexBeanImpl complexBean0 = (ComplexBeanImpl) ctx.getBean("complexBean0");
+        ComplexBeanImpl complexBean1 = (ComplexBeanImpl) ctx.getBean("complexBean1");
+        ComplexBean2Impl complexBean2 = (ComplexBean2Impl) ctx.getBean("complexBean2");
+        assertNotNull(complexBean0.getSimpleBean());
+        assertNotNull(complexBean1.getSimpleBean());
+        assertTrue(complexBean1.isComplex());
+        assertNotNull(complexBean2.getSimpleBean());
+        assertTrue(complexBean2.isComplex());
     }
 }
