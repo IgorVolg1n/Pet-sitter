@@ -1,9 +1,11 @@
 package com.ps.beans.ctr;
 
+import com.ps.beans.SimpleBean;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import static org.junit.Assert.assertNotNull;
@@ -21,10 +23,15 @@ public class CIBeansTest {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:spring/ctr/sample-config-02.xml");
 
         logger.info(" --- All beans in context --- ");
-        for(String beanName :  ctx.getBeanDefinitionNames()) {
+        for (String beanName : ctx.getBeanDefinitionNames()) {
             logger.info("Bean " + beanName + " of type " + ctx.getBean(beanName).getClass().getSimpleName());
         }
 
-        //TODO 3. Retrieve beans of types ComplexBean and make sure their dependencies were correctly set.
+        ComplexBeanImpl complexBean0=(ComplexBeanImpl) ctx.getBean("complexBean0");
+        ComplexBeanImpl complexBean1=(ComplexBeanImpl) ctx.getBean("complexBean1");
+        assertNotNull(complexBean0.getSimpleBean());
+        assertNotNull(complexBean1.getSimpleBean());
+        assertTrue(complexBean1.isComplex());
+
     }
 }
