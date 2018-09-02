@@ -1,11 +1,9 @@
 package com.ps.beans.ctr;
 
-import com.ps.beans.SimpleBean;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import static org.junit.Assert.assertNotNull;
@@ -29,8 +27,11 @@ public class CIBeansTest {
 
         ComplexBeanImpl complexBean0=(ComplexBeanImpl) ctx.getBean("complexBean0");
         ComplexBeanImpl complexBean1=(ComplexBeanImpl) ctx.getBean("complexBean1");
+        ComplexBean2Impl complexBean2 = (ComplexBean2Impl) ctx.getBean("complexBean2");
         assertNotNull(complexBean0.getSimpleBean());
         assertNotNull(complexBean1.getSimpleBean());
+        assertNotNull(complexBean2.getSimpleBean1());
+        assertNotNull(complexBean2.getSimpleBean2());
         assertTrue(complexBean1.isComplex());
 
     }
